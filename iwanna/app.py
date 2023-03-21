@@ -155,15 +155,15 @@ Task: Respond with appropriate shell commands and a brief description of what th
 """
 
     usage_text = f"""{colored("usage:", "yellow", attrs=["bold"])}
-  {colored("$", "grey")} {colored("iwanna [options] <action>", "white")}
+  {colored("$", "light_grey", attrs=["dark"])} {colored("iwanna [options] <action>", "white", attrs=["bold"])}
 
 {colored("description:", "yellow", attrs=["bold"])}
   get shell command suggestions using gpt-4 to help you perform your action.
 
 {colored("example actions:", "yellow", attrs=["bold"])}
-  {colored("$", "grey")} {colored("iwanna search for a process", "light_blue")}
-  {colored("$", "grey")} {colored("iwanna reduce the file size of a raw video file", "light_blue")}
-  {colored("$", "grey")} {colored("iwanna find what wifi i am connected to", "light_blue")}
+  {colored("$", "light_grey", attrs=["dark"])} {colored("iwanna search for a process", "blue")}
+  {colored("$", "light_grey", attrs=["dark"])} {colored("iwanna reduce the file size of a raw video file", "blue")}
+  {colored("$", "light_grey", attrs=["dark"])} {colored("iwanna find what wifi i am connected to", "blue")}
 
 {colored("options:", "yellow", attrs=["bold"])}
   {colored("-c", "green")}, {colored("--config", "green")}
@@ -250,10 +250,10 @@ Task: Respond with appropriate shell commands and a brief description of what th
         print("")
 
         if not os.path.exists(os.path.dirname(config_path)):
-            print("Creating directory: " + colored(os.path.dirname(config_path), "light_blue"))
+            print("Creating directory: " + colored(os.path.dirname(config_path), "blue"))
             os.makedirs(os.path.dirname(config_path))
 
-        print("Writing config to: " + colored(config_path, "light_blue"))
+        print("Writing config to: " + colored(config_path, "blue"))
 
         with open(config_path, "wb") as fp:
             fp.write(config_toml_str.encode("utf-8"))
@@ -347,13 +347,13 @@ Task: Respond with appropriate shell commands and a brief description of what th
                 msg = messages[random.randint(0, len(messages) - 1)]
 
                 self.phases = [
-                    colored("#", "grey", attrs=["bold"])
+                    colored("#", "light_grey", attrs=["dark"])
                     + " "
-                    + colored(msg, "light_yellow", attrs=["bold"])
+                    + colored(msg, "light_yellow")
                     + " ⇢ "
-                    + colored("[", "grey")
-                    + colored(phase, "white")
-                    + colored("]", "grey")
+                    + colored("[", "light_grey", attrs=["dark"])
+                    + colored(phase, "white", attrs=["bold"])
+                    + colored("]", "light_grey", attrs=["dark"])
                     for phase in phases_unformatted
                 ]
 
@@ -404,7 +404,7 @@ Task: Respond with appropriate shell commands and a brief description of what th
                         q += "?"
                     print(colored(f"Question: {q}", "light_yellow"))
                     print(
-                        colored("Answer: ", "light_blue"),
+                        colored("Answer: ", "blue"),
                         end="",
                     )
                     question_answer = input().strip()

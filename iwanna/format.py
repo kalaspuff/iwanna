@@ -18,18 +18,18 @@ def format_response(input_: str) -> str:
 
     output_lines = []
     for line in result.splitlines():
-        if line.startswith("QUESTION --") or line.startswith('"QUESTION --'):
-            output_lines.append(colored(f"# {line}", "yellow"))
+        if line.startswith("QUESTION --"):
+            output_lines.append(colored(f"# {line}", "light_yellow"))
             continue
 
         m = re.match(r"([ ]*)([^#].+)# (.+)", line)
         if m:
-            output_lines.append(f"{m.group(1)}{colored(f'# {m.group(3)}', 'grey')}")
-            output_lines.append(f"{m.group(1)}{colored(m.group(2), 'cyan')}")
+            output_lines.append(f"""{m.group(1)}{colored(f"# {m.group(3)}", "light_grey", attrs=["bold"])}""")
+            output_lines.append(f"""{m.group(1)}{colored(m.group(2), "green", attrs=["bold"])}""")
         else:
             if line.startswith("#"):
-                output_lines.append(colored(line, "grey"))
+                output_lines.append(colored(line, "light_grey", attrs=["bold"]))
             else:
-                output_lines.append(colored(line, "cyan"))
+                output_lines.append(colored(line, "green", attrs=["bold"]))
 
     return "\n".join(output_lines)
