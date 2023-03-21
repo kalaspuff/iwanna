@@ -1,5 +1,7 @@
 .SILENT:
 
+PACKAGENAME := $(shell poetry version | awk {'print $$1'})
+
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
 define shell-functions
@@ -59,10 +61,10 @@ poetry-mypy:
 
 .PHONY: release
 release: poetry-install poetry-pytest poetry-flake8 poetry-mypy
-	@runcmd poetry version `python ${PACKAGENAME}/__version__.py`
+	poetry version `python ${PACKAGENAME}/__version__.py`
 	rm -rf dist/
-	@runcmd poetry build
-	@runcmd twine upload dist/${PACKAGENAME}-`python ${PACKAGENAME}/__version__.py`*
+	poetry build
+	twine upload dist/${PACKAGENAME}-`python ${PACKAGENAME}/__version__.py`*
 	git add pyproject.toml ${PACKAGENAME}/__version__.py
 	git commit -m "Bumped version" --allow-empty
 	git tag -a `python ${PACKAGENAME}/__version__.py` -m `python ${PACKAGENAME}/__version__.py`
