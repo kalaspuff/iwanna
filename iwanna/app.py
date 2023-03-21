@@ -402,9 +402,9 @@ Task: Respond with appropriate shell commands and a brief description of what th
                 if q:
                     if q[-1] not in ("?", ".", "!"):
                         q += "?"
-                    print(colored(f"Question: {q}", "light_yellow"))
+                    print(colored(f"# Question: {q}", "light_yellow"))
                     print(
-                        colored("Answer: ", "blue"),
+                        colored("# Answer: ", "blue"),
                         end="",
                     )
                     question_answer = input().strip()
